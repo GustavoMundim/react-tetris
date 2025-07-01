@@ -1,6 +1,7 @@
-Este é um projeto do jogo Tetris desenvolvido com React, TypeScript e Vite. O objetivo é praticar conceitos de lógica, manipulação de estados com React e estruturação de componentes reutilizáveis.
+This is a Tetris game project developed using React, TypeScript, and Vite. The goal is to practice logic concepts, state management with React, and the structuring of reusable components.
 
-🚀 Tecnologias
+🚀 Technologies
+
 React
 
 TypeScript
@@ -11,15 +12,17 @@ CSS Modules / Styled Components
 
 ESLint
 
-🎯 Funcionalidades
-Movimentação das peças com o teclado
+🎯 Features
 
-Detecção de colisão
+Piece movement using the keyboard
 
-Remoção de linhas completas
+Collision detection
 
-Sistema de pontuação
+Line clearing
 
-Níveis de dificuldade
+Scoring system
 
-Grid visual de jogo em tempo real
+Difficulty levels
+
+Real-time game grid visualization
+
