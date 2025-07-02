@@ -17,15 +17,15 @@ export type ContextProps = {
   position: number
   setPosition: Dispatch<SetStateAction<number>>
   vocabulary: string
-  setVocabulary: (hardware: string) => void
+  setVocabulary: (vocabulary: string) => void
   color: string
   setColor: (color: string) => void
   shape: number[][]
   setShape: (shape: number[][]) => void
   score: number
   setScore: Dispatch<SetStateAction<number>>
-  timerId: number | null
-  setTimerId: (timer: number | null) => void
+  timerId: ReturnType<typeof setInterval> | null
+  setTimerId: Dispatch<SetStateAction<ReturnType<typeof setInterval> | null>>
   paintedCells: number[]
   setPaintedCells: (cells: number[]) => void
   filledCells: FilledCell[]
@@ -48,7 +48,9 @@ export const TetrisContextProvider = ({
     return allShapes[randomIndex]
   })
   const [score, setScore] = useState<number>(0)
-  const [timerId, setTimerId] = useState<number | null>(null)
+  const [timerId, setTimerId] = useState<ReturnType<typeof setInterval> | null>(
+    null,
+  )
   const [paintedCells, setPaintedCells] = useState<number[]>([])
   const [filledCells, setFilledCells] = useState<FilledCell[]>([])
   const [nextPiece, setNextPiece] = useState<number[]>([])
