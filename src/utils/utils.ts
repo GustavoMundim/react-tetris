@@ -2,15 +2,16 @@ import type {
   PaintCellProps,
   verifyIsCollideProps,
 } from '../components/organisms/game/types'
+import type { ShapeObj } from '../context/TetrisGameContext'
 import { Constants } from './constants'
 
-function shuffle(data: number[][][] | string[]) {
+function shuffle(data: ShapeObj[] | string[]) {
   return Math.floor(Math.random() * data.length)
 }
 
 function paintCell({ shape, currentPosition }: PaintCellProps) {
   const cellsToPaint: number[] = []
-  shape.forEach((row) =>
+  shape.matriz.forEach((row) =>
     row.forEach((index) => cellsToPaint.push(index + currentPosition)),
   )
   return cellsToPaint
@@ -18,7 +19,7 @@ function paintCell({ shape, currentPosition }: PaintCellProps) {
 
 function paintCellNext({ shape, currentPosition }: PaintCellProps) {
   const cellsToPaint: number[] = []
-  shape.forEach((row) =>
+  shape.matriz.forEach((row) =>
     row.forEach((index) =>
       cellsToPaint.push(index + currentPosition + Constants.miniGridWidth),
     ),
@@ -34,7 +35,7 @@ function verifyIsCollide({
 }: verifyIsCollideProps) {
   const offset = type === 'increment' ? 1 : -1
 
-  const willCollide = shape.some((row) =>
+  const willCollide = shape.matriz.some((row) =>
     row.some((index) => filledCells.includes(index + position + offset)),
   )
 

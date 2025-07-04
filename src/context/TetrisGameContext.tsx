@@ -5,7 +5,7 @@ import {
   type SetStateAction,
 } from 'react'
 
-import { TetrisContext } from '.'
+import { TetrisGameContext } from '.'
 import { useTetris } from '../hooks/useTetris'
 
 type FilledCell = {
@@ -13,15 +13,21 @@ type FilledCell = {
   color: string
 }
 
-export type ContextProps = {
+export type ShapeObj = {
+  matriz: number[][]
+  shape: string
+  size: string
+}
+
+export type TetrisGameProps = {
   position: number
   setPosition: Dispatch<SetStateAction<number>>
   vocabulary: string
   setVocabulary: (vocabulary: string) => void
   color: string
   setColor: (color: string) => void
-  shape: number[][]
-  setShape: (shape: number[][]) => void
+  shape: ShapeObj
+  setShape: (shape: ShapeObj) => void
   score: number
   setScore: Dispatch<SetStateAction<number>>
   timerId: ReturnType<typeof setInterval> | null
@@ -34,7 +40,7 @@ export type ContextProps = {
   setNextPiece: (nextPiece: number[]) => void
 }
 
-export const TetrisContextProvider = ({
+export const TetrisGameContextProvider = ({
   children,
 }: {
   children: ReactNode
@@ -56,7 +62,7 @@ export const TetrisContextProvider = ({
   const [nextPiece, setNextPiece] = useState<number[]>([])
 
   return (
-    <TetrisContext.Provider
+    <TetrisGameContext.Provider
       value={{
         position,
         setPosition,
@@ -79,6 +85,6 @@ export const TetrisContextProvider = ({
       }}
     >
       {children}
-    </TetrisContext.Provider>
+    </TetrisGameContext.Provider>
   )
 }

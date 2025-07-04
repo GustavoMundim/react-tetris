@@ -1,8 +1,15 @@
-import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+  type Context,
+} from 'react'
 
 import * as S from './tetris.styles'
 
-import { PieceFilled } from '../../molecules/pieceFilled/pieceFilled'
+import { NextPiece } from '../../molecules/nextPiece/nextPiece'
 import { TetrisGrid } from '../../molecules/tetrisGrid/tetrisGrid'
 import {
   paintCell,
@@ -14,9 +21,10 @@ import {
 import Layout from '../../templates/layout/layout'
 import { useKeyboardControls } from '../../../hooks/useKeyboardControls'
 import { Constants } from '../../../utils/constants'
-import { TetrisContext } from '../../../context'
 
-const Tetris = () => {
+import type { TetrisGameProps } from '../../../context/TetrisGameContext'
+
+const Tetris = ({ context }: { context: Context<TetrisGameProps> }) => {
   const {
     position,
     setPosition,
@@ -36,7 +44,7 @@ const Tetris = () => {
     setNextPiece,
     filledCells,
     setFilledCells,
-  } = useContext(TetrisContext)
+  } = useContext(context)
   const [level, setLevel] = useState<number>(1)
 
   const [nextShape, setNextShape] = useState(() => {
@@ -53,13 +61,18 @@ const Tetris = () => {
     return Constants.currentColors[index]
   })
   const params = useMemo(
-    () => ({ text: vocabulary, color: color }),
-    [vocabulary, color],
+    () => ({ text: vocabulary, color: color, sizeShape: shape.size }),
+    [vocabulary, color, shape.size],
   )
+  const newShape = nextShape
 
   const paramsNext = useMemo(
-    () => ({ text: nextVocabulary, color: nextColor }),
-    [nextVocabulary, nextColor],
+    () => ({
+      text: nextVocabulary,
+      color: nextColor,
+      sizeShape: newShape.size,
+    }),
+    [nextVocabulary, nextColor, newShape.size],
   )
 
   const draw = useCallback(() => {
@@ -70,7 +83,7 @@ const Tetris = () => {
 
   const freeze = useCallback(() => {
     const newPosition = position + Constants.gridWidth
-    const willCollide = shape.some((row) =>
+    const willCollide = shape.matriz.some((row) =>
       row.some((squareIndex) => {
         const nextIndex = squareIndex + newPosition
         return (
@@ -81,7 +94,7 @@ const Tetris = () => {
     )
     if (willCollide) {
       const newFilled = [...filledCells]
-      shape.forEach((row) => {
+      shape.matriz.forEach((row) => {
         row.forEach((squareIndex) => {
           newFilled.push({
             index: squareIndex + position,
@@ -89,7 +102,6 @@ const Tetris = () => {
           })
         })
       })
-      const newShape = nextShape
       const newVobaculary = nextVocabulary
       const randomIndexLevel2 = shuffle(Constants.getShapeLevel(level))
       const upcomingShape = Constants.getShapeLevel(level)[randomIndexLevel2]
@@ -99,7 +111,7 @@ const Tetris = () => {
         Constants.currentColors[shuffle(Constants.currentColors)]
       const initialPosition = 3
       const newColor = nextColor
-      const isGameOver = newShape.some((row) =>
+      const isGameOver = newShape.matriz.some((row) =>
         row.some((squareIndex) =>
           newFilled.some(
             (cell) => cell.index === squareIndex + initialPosition,
@@ -204,7 +216,7 @@ const Tetris = () => {
   }, [filledCells])
 
   const movePiece = (direction: 'left' | 'right') => {
-    const isAtEdge = shape.some((row) =>
+    const isAtEdge = shape.matriz.some((row) =>
       row.some((squareIndex) => {
         const newIndex = squareIndex + position
         return direction === 'left'
@@ -274,7 +286,7 @@ const Tetris = () => {
           <S.WrapperNextPiece>
             <h1>Next Piece</h1>
             <S.NextPiecePreview>
-              <PieceFilled
+              <NextPiece
                 paintedCells={nextPiece || []}
                 cellCount={Constants.GRID_SIZE}
                 pieceParams={paramsNext}

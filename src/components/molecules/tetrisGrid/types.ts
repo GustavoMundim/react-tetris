@@ -10,6 +10,7 @@ type GridProps = {
   pieceParams: {
     color: string
     text: string
+    sizeShape: string
   }
 }
 

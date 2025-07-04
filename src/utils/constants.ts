@@ -8,67 +8,110 @@ export const Constants = {
     return this.COLS
   },
 
+  title:
+    'Você recebeu a tarefa de organizar os arquivos dentro da memória de seu dispositivo. Tente encaixá-los da melhor forma para caber bastante coisa.',
   levelOne: {
     squareShapeBig: [
-      [0, 1, 2],
-      [10, 11, 12],
-      [20, 21, 22],
+      {
+        matriz: [
+          [0, 1, 2],
+          [10, 11, 12],
+          [20, 21, 22],
+        ],
+        shape: 'square',
+        size: '3x3',
+      },
     ],
     squareShapeMediumVertical: [
-      [0, 1],
-      [10, 11],
-      [20, 21],
+      {
+        matriz: [
+          [0, 1],
+          [10, 11],
+          [20, 21],
+        ],
+        shape: 'rectangle',
+        size: '3x2',
+      },
     ],
     squareShapeMediumHorizontal: [
-      [0, 1, 2],
-      [10, 11, 12],
+      {
+        matriz: [
+          [0, 1, 2],
+          [10, 11, 12],
+        ],
+        shape: 'rectangle',
+        size: '2x3',
+      },
     ],
     squareShapeSmall: [
-      [0, 1],
-      [10, 11],
+      {
+        matriz: [
+          [0, 1],
+          [10, 11],
+        ],
+        shape: 'square',
+        size: '2x2',
+      },
     ],
   },
 
   levelTwo: {
     squareShapeHollowCenter: [
-      [0, 1, 2],
-      [10, 11, 12],
-      [20, 21, 22],
+      {
+        matriz: [
+          [0, 1, 2],
+          [10, 11, 12],
+          [20, 21, 22],
+        ],
+        shape: 'square',
+        size: '3x3',
+      },
     ],
     squareShapeDiagonal: [
-      [0, 1, 2, 3, 4, 5],
-      [10, 11, 12, 13, 14, 15],
-      [20, 21, 22, 23, 24, 25],
+      {
+        matriz: [
+          [0, 1, 2, 3, 4, 5],
+          [10, 11, 12, 13, 14, 15],
+          [20, 21, 22, 23, 24, 25],
+        ],
+        shape: 'rectangle',
+        size: '3x6',
+      },
     ],
     squareShapeBorderOnly: [
-      [0, 1, 2, 3],
-      [10, 11, 12, 13],
-      [20, 21, 22, 23],
-      [30, 31, 32, 33],
+      {
+        matriz: [
+          [0, 1, 2, 3],
+          [10, 11, 12, 13],
+          [20, 21, 22, 23],
+          [30, 31, 32, 33],
+        ],
+        shape: 'square',
+        size: '4x4',
+      },
     ],
   },
-
   getShapeLevel(level: number) {
     switch (level) {
       case 1:
         return [
-          this.levelOne.squareShapeBig,
-          this.levelOne.squareShapeMediumHorizontal,
-          this.levelOne.squareShapeMediumVertical,
-          this.levelOne.squareShapeSmall,
+          ...this.levelOne.squareShapeBig,
+          ...this.levelOne.squareShapeMediumHorizontal,
+          ...this.levelOne.squareShapeMediumVertical,
+          ...this.levelOne.squareShapeSmall,
         ]
       case 2:
         return [
-          this.levelTwo.squareShapeBorderOnly,
-          this.levelTwo.squareShapeDiagonal,
-          this.levelTwo.squareShapeHollowCenter,
+          ...this.levelTwo.squareShapeBorderOnly,
+          ...this.levelTwo.squareShapeDiagonal,
+          ...this.levelTwo.squareShapeHollowCenter,
         ]
       default:
         return [
-          this.levelOne.squareShapeBig,
-          this.levelOne.squareShapeMediumHorizontal,
-          this.levelOne.squareShapeMediumVertical,
-          this.levelOne.squareShapeSmall,
+          ...this.levelOne.squareShapeBig,
+          ...this.levelOne.squareShapeMediumHorizontal,
+          ...this.levelOne.squareShapeMediumVertical,
+          ...this.levelOne.squareShapeSmall,
         ]
     }
   },

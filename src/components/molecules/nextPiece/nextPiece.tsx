@@ -1,4 +1,4 @@
-import * as S from './pieceFilled.styles'
+import * as S from './nextPiece.styles'
 
 type GridProps = {
   cellCount: number
@@ -6,16 +6,17 @@ type GridProps = {
   pieceParams: {
     text: string
     color: string
+    sizeShape: string
   }
 }
 
-export const PieceFilled = ({
+export const NextPiece = ({
   paintedCells,
   cellCount,
   pieceParams,
 }: GridProps) => {
+  const { color, text, sizeShape } = pieceParams
   const middleIndex = paintedCells[Math.floor(paintedCells.length / 10)]
-  const { color, text } = pieceParams
 
   function getCellColor(index: number) {
     if (paintedCells.includes(index)) return color
@@ -30,8 +31,12 @@ export const PieceFilled = ({
         .map((_, index) => {
           const pieceColor = getCellColor(index)
           return (
-            <S.GridCell key={index} color={pieceColor!}>
-              {index === middleIndex && <p>{text}</p>}
+            <S.GridCell
+              key={index}
+              color={pieceColor}
+              params={{ size: sizeShape, text }}
+            >
+              {index === middleIndex && <h1>{text}</h1>}
             </S.GridCell>
           )
         })}

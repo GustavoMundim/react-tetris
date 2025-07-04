@@ -66,7 +66,7 @@ export const ContentContainer = styled.div`
 `
 
 export const MainGrid = styled.div`
-  width: 200px;
+  width: 250px;
   height: 400px;
   background: rgba(0, 0, 0, 0.5);
   border-radius: 8px;
@@ -113,7 +113,7 @@ export const GameArea = styled.div`
 `
 
 export const NextPiecePreview = styled.div`
-  width: 180px;
+  width: 250px;
   height: 120px;
   background: rgba(0, 0, 0, 0.5);
   border-radius: 8px;
@@ -129,7 +129,7 @@ export const NextPiecePreview = styled.div`
 export const LevelWrapper = styled.div`
   width: 250px;
   height: 140px;
-  margin-top: 90px;
+  margin-top: 50px;
   background: rgba(0, 0, 0, 0.5);
   border-radius: 8px;
   display: flex;

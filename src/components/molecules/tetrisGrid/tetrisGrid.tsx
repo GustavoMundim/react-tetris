@@ -7,8 +7,8 @@ export const TetrisGrid = ({
   cellCount,
   pieceParams,
 }: GridProps) => {
+  const { color, text, sizeShape } = pieceParams
   const middleIndex = paintedCells[Math.floor(paintedCells.length / 10)]
-  const { color, text } = pieceParams
 
   function getCellColor(index: number): string {
     const filled = filledCells.find((cell) => cell.index === index)
@@ -22,7 +22,11 @@ export const TetrisGrid = ({
       {Array.from({ length: cellCount }, (_, index) => {
         const pieceColor = getCellColor(index)
         return (
-          <S.GridCell key={index} color={pieceColor}>
+          <S.GridCell
+            key={index}
+            color={pieceColor}
+            params={{ size: sizeShape, text }}
+          >
             {index === middleIndex && <h1>{text}</h1>}
           </S.GridCell>
         )

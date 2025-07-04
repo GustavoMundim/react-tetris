@@ -1,4 +1,4 @@
 import { createContext } from 'react'
-import type { ContextProps } from './TetrisContext'
+import type { TetrisGameProps } from './TetrisGameContext'
 
-export const TetrisContext = createContext({} as ContextProps)
+export const TetrisGameContext = createContext({} as TetrisGameProps)

@@ -1,11 +1,12 @@
 import Tetris from './components/organisms/game/tetris'
-import { TetrisContextProvider } from './context/TetrisContext'
+import { TetrisGameContext } from './context'
+import { TetrisGameContextProvider } from './context/TetrisGameContext'
 
 function App() {
   return (
-    <TetrisContextProvider>
-      <Tetris />
-    </TetrisContextProvider>
+    <TetrisGameContextProvider>
+      <Tetris context={TetrisGameContext} />
+    </TetrisGameContextProvider>
   )
 }
 
