@@ -4,3 +4,7 @@
 Este é um projeto do jogo Tetris desenvolvido com React, TypeScript e Vite.
 O objetivo principal foi praticar conceitos de lógica, gerenciamento de estado no React e estruturação de componentes reutilizáveis.
 
+
+- Componentização moderna com React
+- Lógica de movimentação e colisão
+- Integração de design e usabilidade
